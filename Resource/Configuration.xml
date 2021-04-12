@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="GB2312"?>
+<opencv_storage>
+	<!--SSD检测器-->
+	<DetectorSSD>
+		<ModelPath>"D:/Workspace/Git/DetectorSamples/Resource/Models/SSD/SafetyHelmet_SSD.onnx"</ModelPath>
+		<InputWidth>512</InputWidth><!--输入分辨率-->
+		<InputHeight>512</InputHeight>
+        <Scale>1.0</Scale><!--缩放尺度-->
+		<MeanValue1>104</MeanValue1><!--均值-->
+		<MeanValue2>117</MeanValue2>
+		<MeanValue3>123</MeanValue3>
+		<SwapRB>0</SwapRB>
+		<Crop>0</Crop>
+		<BackendId>0</BackendId><!--CPU:0,GPU:5-->
+		<TargetId>0</TargetId><!--CPU:0,GPU:6,GPU_FP16:7-->
+
+		<!--////////////////// SSD网络结构参数 ////////////////// -->
+		<!--priorbox层的个数-->
+		<PriorBoxLayerNumber>4</PriorBoxLayerNumber>
+
+		<!--每个priorbox层的minisize和maxSize(需要与输出检测层顺序保持一致，下面涉及每个priorbox层参数的都需要保持顺序一致)-->
+		<MinSize11>10</MinSize11>
+		<MinSize12>16</MinSize12>
+		<MinSize13>24</MinSize13>
+		<MinSize21>32</MinSize21>
+		<MinSize22>48</MinSize22>
+		<MinSize31>64</MinSize31>
+		<MinSize32>96</MinSize32>
+		<MinSize41>128</MinSize41>
+		<MinSize42>192</MinSize42>
+		<MinSize43>256</MinSize43>
+
+		<!--每个priorbox层的Flip和Clip(使用0,1表示)-->
+		<Flip1>0</Flip1>
+		<Flip2>0</Flip2>
+		<Flip3>0</Flip3>
+		<Flip4>0</Flip4>
+
+		<Clip1>0</Clip1>
+		<Clip2>0</Clip2>
+		<Clip3>0</Clip3>
+		<Clip4>0</Clip4>
+
+		<!--每个priorbox层的宽高比(不包括1,且忽略flip,比如宽高比设置为0.3333和0.25且flip为true,则只需要写0.3333和0.25,如果宽高比只有1,则不用填写该项)-->
+		<!-- <AspectRatio11>0.3333</AspectRatio11>
+		<AspectRatio12>0.25</AspectRatio12>
+		<AspectRatio21>0.3333</AspectRatio21>
+		<AspectRatio22>0.25</AspectRatio22>
+		<AspectRatio31>0.3333</AspectRatio31>
+		<AspectRatio32>0.25</AspectRatio32>
+		<AspectRatio41>0.3333</AspectRatio41>
+		<AspectRatio42>0.25</AspectRatio42> -->
+
+		<!--每个priorbox层的step-->
+		<PriorBoxStepWidth1>8</PriorBoxStepWidth1><!--第一个priorbox层的step的width-->
+		<PriorBoxStepWidth2>16</PriorBoxStepWidth2>
+		<PriorBoxStepWidth3>32</PriorBoxStepWidth3>
+		<PriorBoxStepWidth4>64</PriorBoxStepWidth4>
+
+		<PriorBoxStepHeight1>8</PriorBoxStepHeight1><!--第一个priorbox层的step的height-->
+		<PriorBoxStepHeight2>16</PriorBoxStepHeight2>
+		<PriorBoxStepHeight3>32</PriorBoxStepHeight3>
+		<PriorBoxStepHeight4>64</PriorBoxStepHeight4>
+
+		<!--priorbox层中的offset-->
+		<Offset>0.5</Offset>
+
+		<!--DetectionOutput参数-->
+		<ClassNumber>2</ClassNumber>
+		<TopK>400</TopK>
+		<KeepTopK>200</KeepTopK>
+		<NMSThreshold>0.3</NMSThreshold>
+		<ConfidenceThreshold>0.8</ConfidenceThreshold>
+	</DetectorSSD>
+
+	<!--YOLOV3检测器 -->
+	<DetectorYOLOV3>
+		<ModelPath>"../Resource/Models/YOLOV3/SafetyHelmet_YOLOV3.onnx"</ModelPath>
+		<InputWidth>416</InputWidth><!--输入分辨率-->
+		<InputHeight>416</InputHeight>
+        <Scale>1.0</Scale><!--缩放尺度-->
+		<MeanValue1>104</MeanValue1><!--均值-->
+		<MeanValue2>117</MeanValue2>
+		<MeanValue3>123</MeanValue3>
+		<SwapRB>0</SwapRB>
+		<Crop>0</Crop>
+		<BackendId>0</BackendId><!--CPU:0,GPU:5-->
+		<TargetId>0</TargetId><!--CPU:0,GPU:6,GPU_FP16:7-->
+
+		<!--////////////////// YOLOV3网络结构参数 ////////////////// -->
+		<NumberOfClasses>1</NumberOfClasses><!--类别数(不包括背景类)，COCO:80,VOC:20-->
+		<numberOfAnchors>3</numberOfAnchors><!--每个检测层anchor数量，默认为3-->
+		<ConfidenceThreshold>0.5</ConfidenceThreshold>
+		<NMSThreshold>0.45</NMSThreshold>
+
+		<!--Biases,anchor大小,需要与输出检测层顺序保持一致,对于每个anchor坐标顺序是先宽后高-->
+		<Biases1>81</Biases1><!--81x82-->
+		<Biases2>82</Biases2>
+		<Biases3>135</Biases3>
+		<Biases4>169</Biases4>
+		<Biases5>344</Biases5>
+		<Biases6>319</Biases6>
+		<Biases7>10</Biases7><!--10x14-->
+		<Biases8>14</Biases8>
+		<Biases9>23</Biases9>
+		<Biases10>27</Biases10>
+		<Biases11>37</Biases11>
+		<Biases12>58</Biases12>
+	</DetectorYOLOV3>
+
+	<!--YOLOV3检测器 -->
+	<DetectorYOLOV5>
+		<ModelPath>"../Resource/Models/YOLOV5/yolov5s.onnx"</ModelPath>
+		<ClassNameFile>"../Resource/Models/YOLOV5/coco.names"</ClassNameFile>
+		<InputWidth>640</InputWidth><!--输入分辨率-->
+		<InputHeight>640</InputHeight>
+		<UseFP16>1</UseFP16><!--是否使用FP16-->
+		<NumberOfClasses>80</NumberOfClasses><!--类别数(不包括背景类)，COCO:80,VOC:20-->
+		<ConfidenceThreshold>0.5</ConfidenceThreshold>
+		<NMSThreshold>0.5</NMSThreshold>
+		<ObjectThreshold>0.5</ObjectThreshold>
+	</DetectorYOLOV5>
+</opencv_storage>

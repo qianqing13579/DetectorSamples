@@ -1,0 +1,2 @@
+./3rdParty/opencv-3.4.11_mini.tar.gz
+
