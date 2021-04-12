@@ -1,12 +1,12 @@
 # 设置cmake的最低版本
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 2.9)
 
 # 设置项目名
 project(DetectorSamples)
 
 # 设置编译器
 set(CMAKE_CXX_COMPILER g++)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++14)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=c++11)
 set(CMAKE_BUILD_TYPE release)
 
 # 添加头文件路径
