@@ -2,7 +2,7 @@
 <opencv_storage>
 	<!--SSD检测器-->
 	<DetectorSSD>
-		<ModelPath>"D:/Workspace/Git/DetectorSamples/Resource/Models/SSD/SafetyHelmet_SSD.onnx"</ModelPath>
+		<ModelPath>"../Resource/Models/SSD/SafetyHelmet_SSD.onnx"</ModelPath>
 		<InputWidth>512</InputWidth><!--输入分辨率-->
 		<InputHeight>512</InputHeight>
         <Scale>1.0</Scale><!--缩放尺度-->

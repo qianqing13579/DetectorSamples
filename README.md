@@ -37,7 +37,7 @@ sh ./3rdParty/InstallRBuild.sh
 ```
 sh ./3rdParty/InstallOpenCVDependences.sh
 ```
-注意:根据不同的系统，选择脚本中相应的安装方式
+注意:根据不同的linux系统,选择脚本中相应的安装方式,默认为centos系统
 
 ### 修改CMakeLists.txt
 如果使用ubuntu系统，需要修改CMakeLists.txt中依赖库路径：
