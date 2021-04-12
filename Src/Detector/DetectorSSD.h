@@ -107,7 +107,7 @@ public:
 
     virtual ErrorCode Detect(const Mat &srcImage, std::vector<ResultOfDetection> &resultsOfDetection);
 
-protected:
+private:
     // 添加4个新层:PermuteLayer,PriorBoxLayer,SoftmaxLayer,DetectionOutputLayer
     vector<float> PermuteLayer(const vector<float> &data,int width,int height,int channels);
     void PriorBoxLayer(int indexOfLayer,int* priorboxOutputData);
@@ -130,7 +130,7 @@ protected:
 
     void CreateDetectionResults(std::vector<ResultOfDetection> &resultsOfDetection);
 
-protected:
+private:
     cv::dnn::Net net;
     std::vector<String> outputNodeNames;
 
