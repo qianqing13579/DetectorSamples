@@ -77,7 +77,7 @@ cd ./build/
 ```
 ./DetectorSamples 0
 ```
-运行SSD示例程序
+运行SSD示例程序,会在当前目录下生成检测结果图像Result.jpg
 
 ## 模型转换说明
 ### SSD模型
