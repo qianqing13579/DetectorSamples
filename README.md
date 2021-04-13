@@ -81,8 +81,17 @@ cd ./build/
 
 ## 模型转换说明
 ### SSD模型
-1. Resource/Models/SSD/目录下提供了模型转换示例，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt。本示例使用caffe框架，其他框架需要按照caffe的实现方式作出相应的修改。
-2. 模型转换成功后需要修改 Resource/Configuration.xml中SSD网络结构参数，xml中对每个参数的含义作出了详细的解释。
+与分类模型不同，SSD模型较为复杂，而且不同训练框架实现SSD的方式不同，同时不同的推理框架支持的算子不同，这就给转换为onnx模型带来了较大困难。一般情况下我们需要对训练好的SSD模型做一些修改才能够在特定推理框架上使用，基本的思路就是：onnx模型中只包含原始网络的一部分，让onnx包含的一部分在GPU上运行，剩下的都在CPU上运行。这里提供一种修改SSD网络结构的参考方案，这种方案可以在绝大部分推理框架中使用(目前在OpenCV,TensorRT中都测试通过)。
+
+#### 修改SSD网络结构
+
+onnx模型中只保留到permute层的前一层，permute层以及后面的所有层全部在CPU上运行。
+
+<p align="left"><img width="100%" src="Resource/Images/SSD_1.jpg" /></p>
+
+图中红色的部分和黄色部分都是在CPU上执行，其他都是在GPU上执行。Resource/Models/SSD/目录下提供了这种方案的模型转换示例，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt。本示例使用caffe框架，其他框架需要按照caffe的实现方式作出相应的修改。模型转换成功后需要修改 Resource/Configuration.xml中SSD网络结构参数，xml中对每个参数的含义作出了详细的解释。具体代码实现参考Src/Detector/目录下的SSD检测器。
+
+本示例中对SSD网络结构的修改的方式同样可以应用到其他复杂网络，比如后面提到的YOLOV3,YOLOV5等,这里就不再一一赘述了。
 
 ### YOLOV3模型
 1. Resource/Models/YOLOV3/目录下提供了模型转换示例，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt。本示例使用caffe框架，其他框架需要按照caffe的实现方式作出相应的修改。
