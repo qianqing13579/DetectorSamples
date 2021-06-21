@@ -1,6 +1,6 @@
 # DetectorSamples
 
-目前SSD和YOLO是工业界使用最多的两种检测器。在工作中经常会遇到一些初学的小伙伴咨询SSD或者YOLO模型的推理的问题，他们大多数只会使用python完成推理，比如使用onnxruntime或者直接使用pytorch的python接口，他们往往不知道如何使用C++加载onnx模型实现SSD或者YOLO的推理，于是最近整理了一下自己实现的SSD,YOLOV3和YOLOV5推理代码，项目虽然是基于OpenCV实现的，但是由于使用的是onnx模型，所以代码可以很容易迁移到TensorRT,NCNN等其他C++推理框架(只需要更换模型加载和前向计算部分的实现即可，其他部分都是一样的)。在实现的过程中基本是参考了原作者的开源代码，也参考了网上的一些代码，由于记不清出处，这里无法给出参考代码的地址，这里感谢各位作者。希望自己的工作能够帮助更多初学者学习SSD和YOLO。
+目前SSD和YOLO是工业界使用最多的两种检测器。最近整理了一下自己实现的SSD,YOLOV3和YOLOV5推理代码，项目虽然是基于OpenCV实现的，但是由于使用的是onnx模型，所以代码可以很容易移植到TensorRT,NCNN等其他C++推理框架。在实现的过程中基本是参考了原作者的开源代码，也参考了网上的一些代码，由于记不清出处，这里无法给出参考代码的地址，这里感谢各位作者。希望自己的工作能够帮助更多初学者学习SSD和YOLO。
 
 ## 目录
 - [目录结构](#目录结构)
@@ -61,6 +61,7 @@ rbuild build -d depend
 export LD_LIBRARY_PATH=项目根目录/depend/lib64/:$LD_LIBRARY_PATH
 ```
 **Ubuntu**:
+
 ```
 export LD_LIBRARY_PATH=项目根目录/depend/lib/:$LD_LIBRARY_PATH
 ```
@@ -91,13 +92,12 @@ onnx模型中只保留到permute层的前一层，permute层以及后面的所�
 
 <p align="left"><img width="100%" src="Resource/Images/SSD_1.jpg" /></p>
 
-图中红色的部分和黄色部分都是在CPU上执行，其他都是在GPU上执行。Resource/Models/SSD/目录下提供了这种方案的模型转换示例，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt。本示例使用caffe框架，其他框架需要按照caffe的实现方式作出相应的修改。模型转换成功后需要修改 Resource/Configuration.xml中SSD网络结构参数，xml中对每个参数的含义作出了详细的解释。具体代码实现参考Src/Detector/目录下的SSD检测器。
+图中红色的部分和黄色部分都是在CPU上执行，其他都是在GPU上执行。Resource/Models/SSD/目录下提供了这种方案的模型转换示例，其中train.prototxt为训练网络结构，deploy.prototxt为推理网络结构，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt，转换为onnx模型的时候需要使用deploy_Caffe2ONNX.prototxt，caffe模型转onnx参考https://github.com/htshinichi/caffe-onnx，本示例训练使用的caffe工程地址:https://github.com/qianqing13579/Caffe_SSD_YOLOV3 。如果你使用其他框架训练SSD则需要按照caffe的实现方式作出相应的修改。模型转换成功后需要修改 Resource/Configuration.xml中SSD网络结构参数，xml中对每个参数的含义作出了详细的解释。具体代码实现参考Src/Detector/目录下的SSD检测器。
 
 本示例中对SSD网络结构的修改的方式同样可以应用到其他复杂网络，比如后面提到的YOLOV3,YOLOV5等,这里就不再一一赘述了。
 
 ### YOLOV3模型
-1. Resource/Models/YOLOV3/目录下提供了模型转换示例，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt。本示例使用caffe框架，其他框架需要按照caffe的实现方式作出相应的修改。
-2. 模型转换成功后需要修改 Resource/Configuration.xml中YOLOV3网络结构参数，xml中对每个参数的含义作出了详细的解释。
+Resource/Models/YOLOV3/目录下提供了模型转换示例，其中train.prototxt为训练网络结构，deploy.prototxt为推理网络结构，deploy.prototxt对应的onnx版本为deploy_Caffe2ONNX.prototxt，转换为onnx模型的时候需要使用deploy_Caffe2ONNX.prototxt，本示例训练使用的caffe工程地址:https://github.com/qianqing13579/Caffe_SSD_YOLOV3。模型转换成功后需要修改 Resource/Configuration.xml中YOLOV3网络结构参数，xml中对每个参数的含义作出了详细的解释。
 
 ### YOLOV5模型
-本示例中的模型使用的是https://github.com/ultralytics/yolov5 中提供的模型，需要注意的是官方的YOLOV5模型中的Focus模块使用到了步长为2的切片操作,OpenCV暂时不支持该操作,在转换为onnx模型的时候对这部分做了修改，使用view和permute操作代替(这部分代码官方代码中也提供了，只是被注释掉了)，具体修改方法参考Resource/Models/YOLOV5/yolov5s.onnx模型。
+Resource/Models/YOLOV5/提供了YOLOV5示例模型，本示例模型使用的是https://github.com/ultralytics/yolov5 中提供的模型，需要注意的是官方的YOLOV5模型中的Focus模块使用到了步长为2的切片操作,OpenCV暂时不支持该操作,在转换为onnx模型的时候对这部分做了修改，使用view和permute操作代替(这部分代码官方代码中也提供了，只是被注释掉了)，具体修改方法参考Resource/Models/YOLOV5/yolov5s.onnx模型。

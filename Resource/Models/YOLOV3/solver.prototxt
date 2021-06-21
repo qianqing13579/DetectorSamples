@@ -1,0 +1,13 @@
+train_net: "./prototxt/SafetyHelmet/SafetyHelmet_YOLOV3/train.prototxt"
+base_lr: 0.001
+display: 10
+max_iter: 50000000
+lr_policy: "fixed"
+stepvalue: 10000
+stepvalue: 20000
+gamma: 0.1
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 1000
+snapshot_prefix: "./asset/snapshot/SafetyHelmet/SafetyHelmet_YOLOV3/SafetyHelmet_YOLOV3"
+solver_mode:GPU
