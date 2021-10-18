@@ -20,7 +20,6 @@ SOURCES += \
     Src/Detector/DetectorYOLOV5.cpp \
     Src/Utility/CommonUtility.cpp \
     Src/Utility/Filesystem.cpp \
-    Src/Utility/SimpleLog.cpp \
     Src/Sample.cpp \
     Src/main.cpp
 

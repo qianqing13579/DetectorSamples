@@ -35,8 +35,7 @@ set(SOURCE_FILES ${CMAKE_CURRENT_SOURCE_DIR}/Src/main.cpp
                 ${CMAKE_CURRENT_SOURCE_DIR}/Src/Detector/DetectorYOLOV5.cpp
                 ${CMAKE_CURRENT_SOURCE_DIR}/Src/Detector/DetectorInterface.cpp
                 ${CMAKE_CURRENT_SOURCE_DIR}/Src/Utility/CommonUtility.cpp
-                ${CMAKE_CURRENT_SOURCE_DIR}/Src/Utility/Filesystem.cpp
-                ${CMAKE_CURRENT_SOURCE_DIR}/Src/Utility/SimpleLog.cpp)
+                ${CMAKE_CURRENT_SOURCE_DIR}/Src/Utility/Filesystem.cpp)
 
 # 添加可执行目标
 add_executable(DetectorSamples ${SOURCE_FILES})

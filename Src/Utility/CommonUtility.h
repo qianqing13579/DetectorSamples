@@ -20,15 +20,15 @@ using namespace std;
 namespace QQ
 {
 
-DLL_EXPORTS string GetCurrentTimeString();
-DLL_EXPORTS std::vector<string> SplitString(string str,std::string separator);
+string GetCurrentTimeString();
+std::vector<string> SplitString(string str,std::string separator);
 
 // 排序规则: 按照置信度或者按照面积排序
-DLL_EXPORTS bool CompareConfidence(const ResultOfDetection &L,const ResultOfDetection &R);
-DLL_EXPORTS bool CompareConfidence2(const ResultOfPrediction &L, const ResultOfPrediction &R);
-DLL_EXPORTS bool CompareArea(const ResultOfDetection &L,const ResultOfDetection &R);
+bool CompareConfidence(const ResultOfDetection &L,const ResultOfDetection &R);
+bool CompareConfidence2(const ResultOfPrediction &L, const ResultOfPrediction &R);
+bool CompareArea(const ResultOfDetection &L,const ResultOfDetection &R);
 
-DLL_EXPORTS void NMS(std::vector<ResultOfDetection> &detections, float IOUThreshold);
+void NMS(std::vector<ResultOfDetection> &detections, float IOUThreshold);
 
 }
 

@@ -40,7 +40,7 @@ typedef struct  _YOLOV3PredictionResult
 	int classType;
 }YOLOV3PredictionResult;
 
-class DLL_EXPORTS DetectorYOLOV3 : public DetectorInterface
+class DetectorYOLOV3 : public DetectorInterface
 {
 public:
     DetectorYOLOV3();

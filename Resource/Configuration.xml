@@ -2,7 +2,7 @@
 <opencv_storage>
 	<!--SSD检测器-->
 	<DetectorSSD>
-		<ModelPath>"../Resource/Models/SSD/SafetyHelmet_SSD.onnx"</ModelPath>
+		<ModelPath>"../Resource/Models/SSD/SSD.onnx"</ModelPath>
 		<InputWidth>512</InputWidth><!--输入分辨率-->
 		<InputHeight>512</InputHeight>
         <Scale>1.0</Scale><!--缩放尺度-->
@@ -75,7 +75,7 @@
 
 	<!--YOLOV3检测器 -->
 	<DetectorYOLOV3>
-		<ModelPath>"../Resource/Models/YOLOV3/SafetyHelmet_YOLOV3.onnx"</ModelPath>
+		<ModelPath>"../Resource/Models/YOLOV3/YOLOV3.onnx"</ModelPath>
 		<InputWidth>416</InputWidth><!--输入分辨率-->
 		<InputHeight>416</InputHeight>
         <Scale>1.0</Scale><!--缩放尺度-->

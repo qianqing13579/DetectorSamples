@@ -29,9 +29,9 @@
 
 
 ### 安装rbuild
-当前目录为工程根目录
 
 ```
+cd <path_to_detector_samples>
 sh ./3rdParty/InstallRBuild.sh
 ```
 
@@ -46,7 +46,6 @@ sh ./3rdParty/InstallOpenCVDependences.sh
 将"${CMAKE_CURRENT_SOURCE_DIR}/depend/lib64/"修改为"${CMAKE_CURRENT_SOURCE_DIR}/depend/lib/"
 
 ### 安装OpenCV并编译工程
-当前目录为工程根目录
 
 ```
 rbuild build -d depend
@@ -58,12 +57,12 @@ rbuild build -d depend
 
 **Centos**:
 ```
-export LD_LIBRARY_PATH=项目根目录/depend/lib64/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=<path_to_detector_samples>/depend/lib64/:$LD_LIBRARY_PATH
 ```
 **Ubuntu**:
 
 ```
-export LD_LIBRARY_PATH=项目根目录/depend/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=<path_to_detector_samples>/depend/lib/:$LD_LIBRARY_PATH
 ```
 
 然后执行:
@@ -84,7 +83,7 @@ cd ./build/
 
 ## 模型转换说明
 ### SSD模型
-与分类模型不同，SSD模型较为复杂，而且不同训练框架实现SSD的方式不同，同时不同的推理框架支持的算子不同，这就给转换为onnx模型带来了较大困难。一般情况下我们需要对训练好的SSD模型做一些修改才能够在特定推理框架上使用，基本的思路就是：onnx模型中只包含原始网络的一部分，让onnx包含的一部分在GPU上运行，剩下的都在CPU上运行。这里提供一种修改SSD网络结构的参考方案，这种方案可以在绝大部分推理框架中使用(目前在OpenCV,TensorRT中都测试通过)。
+与分类模型不同，SSD模型较为复杂，而且不同训练框架实现SSD的方式不同，同时不同的推理框架支持的算子不同，这就给转换为onnx模型带来了较大困难。一般情况下我们需要对训练好的SSD模型做一些修改才能够在特定推理框架上使用，基本的思路就是：onnx模型中只包含原始网络的一部分，让onnx包含的一部分在GPU上运行，剩下的都在CPU上运行(一般这部分都是后处理)。这里提供一种修改SSD网络结构的参考方案，这种方案可以在绝大部分推理框架中使用(目前在OpenCV,TensorRT中都测试通过)。
 
 #### 修改SSD网络结构
 

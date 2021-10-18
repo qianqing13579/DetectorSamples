@@ -20,9 +20,10 @@ namespace QQ
 
 #define SSD_MAX_PRIORBOX_LAYER_NUM      10 // 能够支持的最大检测层数量
 
-typedef struct _SSDParameter
+// SSD参数
+typedef struct  _SSDParameter
 {
-    int numberOfPriorBoxLayer;
+    int numberOfPriorBoxLayer; // 检测层数量
 
     // Model Parameters
     int convHeight[SSD_MAX_PRIORBOX_LAYER_NUM*2];
@@ -30,18 +31,18 @@ typedef struct _SSDParameter
     int convChannel[SSD_MAX_PRIORBOX_LAYER_NUM*2];
 
     // PriorBoxLayer Parameters
-    int priorBoxWidth[SSD_MAX_PRIORBOX_LAYER_NUM];
-    int priorBoxHeight[SSD_MAX_PRIORBOX_LAYER_NUM];
-    vector<vector<float>> priorBoxMinSize;
-    vector<vector<float>> priorBoxMaxSize;
-    int minSizeNum[SSD_MAX_PRIORBOX_LAYER_NUM];
-    int maxSizeNum[SSD_MAX_PRIORBOX_LAYER_NUM];
-    int srcImageHeight;
+    int priorBoxWidth[SSD_MAX_PRIORBOX_LAYER_NUM]; // 每个检测层priorbox的宽
+    int priorBoxHeight[SSD_MAX_PRIORBOX_LAYER_NUM];// 每个检测层priorbox的高
+    vector<vector<float>> priorBoxMinSize; // 每个检测层priorbox的minsize
+    vector<vector<float>> priorBoxMaxSize; // 每个检测层priorbox的maxsize
+    int minSizeNum[SSD_MAX_PRIORBOX_LAYER_NUM]; // 每个检测层priorbox的minsize数量
+    int maxSizeNum[SSD_MAX_PRIORBOX_LAYER_NUM]; // 每个检测层priorbox的maxsize数量
+    int srcImageHeight;// 原图大小
     int srcImageWidth;
-    int inputAspectRatioNum[SSD_MAX_PRIORBOX_LAYER_NUM];
-    vector<vector<float>> priorBoxAspectRatio;
-    float priorBoxStepWidth[SSD_MAX_PRIORBOX_LAYER_NUM];
-    float priorBoxStepHeight[SSD_MAX_PRIORBOX_LAYER_NUM];
+    int inputAspectRatioNum[SSD_MAX_PRIORBOX_LAYER_NUM];// 每个检测层宽高比的数量 
+    vector<vector<float>> priorBoxAspectRatio;// 每个检测层的宽高比
+    float priorBoxStepWidth[SSD_MAX_PRIORBOX_LAYER_NUM];// 每个检测层步长的宽
+    float priorBoxStepHeight[SSD_MAX_PRIORBOX_LAYER_NUM];// 每个检测层步长的高
     float offset;
     int flip[SSD_MAX_PRIORBOX_LAYER_NUM];
     int clip[SSD_MAX_PRIORBOX_LAYER_NUM];
@@ -56,7 +57,7 @@ typedef struct _SSDParameter
     int softMaxOutChn;
 
     // DetectionOutLayer Parameters
-    int classNum;
+    int classNum;// 类别数(包含背景类)
     int topK;
     int keepTopK;
     int NMSThresh;
@@ -97,7 +98,7 @@ typedef struct _QuickSortStack
     int max;
 }QuickSortStack;
 
-class DLL_EXPORTS DetectorSSD : public DetectorInterface
+class DetectorSSD : public DetectorInterface
 {
 public:
     DetectorSSD();

@@ -21,7 +21,7 @@ namespace QQ
 {
 
 
-class DLL_EXPORTS DetectorInterface
+class DetectorInterface
 {
 public:
     DetectorInterface();
